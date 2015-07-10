@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
+//add java to the project
+apply plugin : 'java'
+
+//make your .jar a executable jar
+apply plugin: 'application'
+
+//make your .jar a "fat" jar with some standalone server app
+apply plugin: 'spring-boot'
+
+//add maven dependencies
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+compile("org.springframework.boot:spring-boot-starter-web")
+
+    compile 'org.hibernate:hibernate-core:4.3.6.Final'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile 'org.slf4j:slf4j-simple:1.7.7'
+    compile 'org.javassist:javassist:3.15.0-GA'
+    compile 'mysql:mysql-connector-java:5.1.31'
+    compile 'commons-dbcp:commons-dbcp:1.4'
+
+}
+
+//jar file versioning and base name
+jar {
+    baseName = 'gs-gradle'
+    version =  '0.1.0'
+}
+
+//this wrapper will let you build the app with ./gradlew without need to configure gradle on your computer.
+//the person who created the project first have already put the following to the build.gradle and
+//ran 'gradle wrapper' to create gradlew.sh and gradlew.bat
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.5'
+}
